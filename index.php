@@ -18,7 +18,7 @@
     $senha = '';
     $base = 'agenda';
 
-    $conexao = new mysqli($servidor, $usuario, $senha, $base)
+    $conexao = new mysqli($servidor, $usuario, $senha, $base);
 
     if($conexao->connect_error)
 {
@@ -30,16 +30,33 @@ else
 }
 
 $sql = 'SELECT * FROM tbl_agenda;';
-$resultado = $conexao->query(sql)
+$resultado = $conexao->query($sql);
 
 if ($resultado->num_rows > 0)
 {
+  echo '<table class="table table-dark table-striped">';
+  echo '  <thead>';
+  echo '    <tr>';
+  echo '     <th scope="col">ID</th>';
+  echo '      <th scope="col">NOME</th>';
+  echo '     <th scope="col">CELULAR</th>';
+  echo '    </tr>';
+  echo ' </thead>';
+  echo '<tbody>';
+
   while($linhas = $resultado->fetch_assoc())
   {
-    echo 'ID: ' . $linhas['id'];
+    //echo 'ID: ' . $linhas['id'] . ' - NOME: ' . $linhas['nome'] . ' - SOBRENOME: ' . $linhas['sobrenome'] . ' - TELEFONE: ' . $linhas['telefone'] . ' - CELULAR: ' . $linhas['celular'] . ' - EMAIL: ' . $linhas['email'] . ' - LINKEDIN: ' . $linhas['linkedin'] . ' - BLOQUEADO? ' . $linhas['bloqueado'] . '<br>';
+    
+    echo '  <tr>';
+    echo '  <th scope="row">' . $linhas['id'] . '</th>';
+    echo '  <td>' . $linhas['nome'] . '</td>';
+    echo '  <td>' . $linhas['celular'] . '</td>';
+    echo '</tr>';
   }
+  echo '</tbody>';
+  echo '</table>';
 }
-
   ?>
 </body>
 </html>
