@@ -7,11 +7,14 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/1dbe7eced8.js" crossorigin="anonymous"></script>
 
   <title>Select com table</title>
 </head>
 <body>
   <?php
+
+  session_start();
 
     $servidor = 'localhost';
     $usuario = 'root';
@@ -23,10 +26,6 @@
     if($conexao->connect_error)
 {
     die('Falha de Conexão: ' . $conexao->connect_error);
-}
-else
-{
-    echo 'conexão OK';
 }
 
 $sql = 'SELECT * FROM tbl_agenda;';
@@ -40,6 +39,7 @@ if ($resultado->num_rows > 0)
   echo '     <th scope="col">ID</th>';
   echo '      <th scope="col">NOME</th>';
   echo '     <th scope="col">CELULAR</th>';
+  echo '     <th scope="col">APAGAR</th>';
   echo '    </tr>';
   echo ' </thead>';
   echo '<tbody>';
@@ -52,6 +52,7 @@ if ($resultado->num_rows > 0)
     echo '  <th scope="row">' . $linhas['id'] . '</th>';
     echo '  <td>' . $linhas['nome'] . '</td>';
     echo '  <td>' . $linhas['celular'] . '</td>';
+    echo '  <td> <a href="delete.php?id_delete=' . $linhas['id'] . '"> <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i> </a> </td>';
     echo '</tr>';
   }
   echo '</tbody>';
